@@ -17,6 +17,15 @@ namespace PUnit.Framework
                     Assert.AssertFailed, expected, actual));
         }
 
+        public static void AreEqual(string expected, string actual)
+        {
+            if (expected == null)
+                throw new ArgumentNullException("Expected must be not null");
+            if (expected.Equals(actual) == false)
+                throw new AssertException(string.Format(StandardFormat,
+                    Assert.AssertFailed, expected, actual));
+        }
+
         public static void IsTrue(bool val)
         {
             if (val == false)

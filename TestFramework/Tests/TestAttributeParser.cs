@@ -6,19 +6,19 @@ using PUnit.Framework.Tests.MockData;
 
 namespace PUnit.Framework.Tests
 {
-    [NUnit.Framework.TestFixture]
+    [TestFixture]
     public class TestAttributeParser
     {
-        [NUnit.Framework.Test]
+        [Test]
         public void NoAttributes()
         {
-            NUnit.Framework.Assert.AreEqual(0, AttributeParser.ExtractTestMethods<NUnit.Framework.TestAttribute>(typeof(ClassNoTestFixture)).Count);
+            Assert.AreEqual(0, AttributeParser.ExtractTestMethods<TestAttribute>(typeof(ClassNoTestFixture)).Count);
         }
 
-        [NUnit.Framework.Test]
+        [Test]
         public void OneMethodWithAttribute()
         {
-            NUnit.Framework.Assert.AreEqual(1, AttributeParser.ExtractTestMethods<NUnit.Framework.TestAttribute>(typeof(ClassOneTest)).Count);
+            Assert.AreEqual(1, AttributeParser.ExtractTestMethods<TestAttribute>(typeof(ClassOneTest)).Count);
         }
     }
 }

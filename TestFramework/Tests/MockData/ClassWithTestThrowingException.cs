@@ -5,10 +5,10 @@ using System.Text;
 
 namespace PUnit.Framework.Tests.MockData
 {
-    [NUnit.Framework.TestFixture]
+    [TestFixture]
     public class ClassWithTestThrowingException
     {
-        [NUnit.Framework.Test]
+        [Test]
         public void TestThrowsException()
         {
             throw new Exception("I'm a failing test");

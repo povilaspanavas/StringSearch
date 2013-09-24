@@ -5,10 +5,10 @@ using System.Text;
 
 namespace PUnit.Framework.Tests.MockData
 {
-    [NUnit.Framework.TestFixture]
+    [TestFixture]
     public class ClassWithIgnoredTest
     {
-        [NUnit.Framework.Test, NUnit.Framework.Ignore]
+        [Test, Ignore]
         public void IgnoredTest()
         {
 

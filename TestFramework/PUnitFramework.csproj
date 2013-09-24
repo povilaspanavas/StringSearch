@@ -31,7 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,10 +58,6 @@
     <Compile Include="Tests\TestRunner.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StringSearch.Tests\StringSearch.Tests.csproj">
-      <Project>{F9758904-FE70-4D7A-81D1-178A8CFBB321}</Project>
-      <Name>StringSearch.Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StringSearch\StringSearch.csproj">
       <Project>{A3491EE5-3C4E-45B3-B91C-3CEF370B5914}</Project>
       <Name>StringSearch</Name>

@@ -2,66 +2,49 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using StringSearch.Tests;
 using PUnit.Framework.Tests.MockData;
 
 namespace PUnit.Framework.Tests
 {
-    [NUnit.Framework.TestFixture]
+    [TestFixture]
     class TestRunner
     {
         private Runner runner = new Runner();
 
-        [NUnit.Framework.Test]
-        public void Run()
-        {
-            NUnit.Framework.Assert.IsTrue(runner.Run(typeof(TestFindString).Assembly).Success);
-            NUnit.Framework.Assert.IsTrue(0 < runner.Run(typeof(TestFindString).Assembly).SuccessCount);
-        }
+       
 
-        [NUnit.Framework.Test]
+        [Test]
         public void ExecuteTestFixture()
         {
             var classResult = runner.ExecuteTestFixture(typeof(ClassOneTest));
-            NUnit.Framework.Assert.IsTrue(classResult.Success);
-            NUnit.Framework.Assert.AreEqual(typeof(ClassOneTest).Name, classResult.Name);
-            NUnit.Framework.Assert.AreEqual(1, classResult.MethodResults.Count);
+            Assert.IsTrue(classResult.Success);
+            Assert.AreEqual(typeof(ClassOneTest).Name, classResult.Name);
+            Assert.AreEqual(1, classResult.MethodResults.Count);
         }
 
-        [NUnit.Framework.Test]
+        [Test]
         public void ExecuteTestFixtureNoTestsInClass()
         {
             var classResult = runner.ExecuteTestFixture(typeof(ClassNoTestFixture));
-            NUnit.Framework.Assert.IsTrue(classResult.Success);
-            NUnit.Framework.Assert.AreEqual(typeof(ClassNoTestFixture).Name, classResult.Name);
-            NUnit.Framework.Assert.AreEqual(0, classResult.MethodResults.Count);
+            Assert.IsTrue(classResult.Success);
+            Assert.AreEqual(typeof(ClassNoTestFixture).Name, classResult.Name);
+            Assert.AreEqual(0, classResult.MethodResults.Count);
         }
 
-        [NUnit.Framework.Test]
-        public void ExecuteRealTests()
-        {
-            List<Type> types = new List<Type>();
-            types.Add(typeof(TestFindString));
-            var classResults = runner.ExecuteAllTestFixtures(types);
-            NUnit.Framework.Assert.AreEqual(1, classResults.Count);
-            var classResult = classResults[0];
-            NUnit.Framework.Assert.AreEqual(17, classResult.MethodResults.Count);
-        }
-
-        [NUnit.Framework.Test]
+        [Test]
         public void ExecuteTestWithExpectedException()
         {
             List<Type> types = new List<Type>();
             types.Add(typeof(ClassWithTestExpectingException));
             var classResults = runner.ExecuteAllTestFixtures(types);
-            NUnit.Framework.Assert.AreEqual(1, classResults.Count);
+            Assert.AreEqual(1, classResults.Count);
             
             var classResult = classResults[0];
-            NUnit.Framework.Assert.AreEqual(1, classResult.MethodResults.Count);
-            NUnit.Framework.Assert.IsTrue(classResult.Success);
+            Assert.AreEqual(1, classResult.MethodResults.Count);
+            Assert.IsTrue(classResult.Success);
         }
 
-        [NUnit.Framework.Test]
+        [Test]
         public void ExecuteTestFixtureWithIgnoredTest()
         {
             var classResult = runner.ExecuteTestFixture(typeof(ClassWithIgnoredTest));
@@ -69,15 +52,15 @@ namespace PUnit.Framework.Tests
             results.Add(classResult);
             var suiteResult = runner.MakeSummary(results);
             
-            NUnit.Framework.Assert.IsTrue(classResult.Success);
-            NUnit.Framework.Assert.AreEqual(typeof(ClassWithIgnoredTest).Name, classResult.Name);
-            NUnit.Framework.Assert.AreEqual(1, suiteResult.IgnoredCount);
-            NUnit.Framework.Assert.AreEqual(0, suiteResult.FailedCount);
-            NUnit.Framework.Assert.AreEqual(0, suiteResult.SuccessCount);
+            Assert.IsTrue(classResult.Success);
+            Assert.AreEqual(typeof(ClassWithIgnoredTest).Name, classResult.Name);
+            Assert.AreEqual(1, suiteResult.IgnoredCount);
+            Assert.AreEqual(0, suiteResult.FailedCount);
+            Assert.AreEqual(0, suiteResult.SuccessCount);
 
-            NUnit.Framework.Assert.AreEqual(1, suiteResult.SuccessfullTests.Count);
-            NUnit.Framework.Assert.AreEqual(1, suiteResult.SuccessfullTests[0].MethodResults.Count);
-            NUnit.Framework.Assert.IsTrue(suiteResult.SuccessfullTests[0].MethodResults[0].Ignored);
+            Assert.AreEqual(1, suiteResult.SuccessfullTests.Count);
+            Assert.AreEqual(1, suiteResult.SuccessfullTests[0].MethodResults.Count);
+            Assert.IsTrue(suiteResult.SuccessfullTests[0].MethodResults[0].Ignored);
         }
     }
 }

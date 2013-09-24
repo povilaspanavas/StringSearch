@@ -11,9 +11,29 @@ namespace PUnit.Framework
     {
     }
 
-    [AttributeUsage(AttributeTargets.Method)]
+   [AttributeUsage(AttributeTargets.Method)]
     public class TestAttribute : Attribute
     {
     }
 
+    [AttributeUsage(AttributeTargets.Method)]
+    public class IgnoreAttribute : Attribute
+    {
+    }
+
+    [AttributeUsage(AttributeTargets.Method)]
+    public class ExpectedExceptionAttribute : Attribute
+    {
+        private Type _type;
+
+        public Type ExpectedException
+        {
+            get { return _type; }
+        }
+
+        public ExpectedExceptionAttribute(Type typeOfException)
+        {
+            _type = typeOfException;
+        }
+    }
 }

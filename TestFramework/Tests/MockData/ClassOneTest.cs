@@ -5,10 +5,10 @@ using System.Text;
 
 namespace PUnit.Framework.Tests.MockData
 {
-    [NUnit.Framework.TestFixture]
+    [TestFixture]
     class ClassOneTest
     {
-        [NUnit.Framework.Test]
+        [Test]
         public void TestOne()
         {
         }

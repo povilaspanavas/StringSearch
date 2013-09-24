@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using StringSearch.Tests;
 
 namespace PUnit.Framework
 {
@@ -11,7 +10,7 @@ namespace PUnit.Framework
     {
         public SuiteResult Run(Assembly assembly)
         {
-            var typesWithTests = AttributeParser.ExtractTestTypes<NUnit.Framework.TestFixtureAttribute>(assembly);
+            var typesWithTests = AttributeParser.ExtractTestTypes<TestFixtureAttribute>(assembly);
             var testsByClassResults = ExecuteAllTestFixtures(typesWithTests);
             var result = MakeSummary(testsByClassResults);
             return result;
@@ -58,7 +57,7 @@ namespace PUnit.Framework
 
         public ClassResult ExecuteTestFixture(Type type)
         {
-            var testMethods = AttributeParser.ExtractTestMethods<NUnit.Framework.TestAttribute>(type);
+            var testMethods = AttributeParser.ExtractTestMethods<TestAttribute>(type);
             if (testMethods.Count == 0)
                 return new ClassResult(type);
 
@@ -66,7 +65,7 @@ namespace PUnit.Framework
             object typeObject = Activator.CreateInstance(type);
             foreach (MethodInfo method in testMethods)
             {
-                NUnit.Framework.IgnoreAttribute attributeIgnore = AttributeParser.GetAttribute<NUnit.Framework.IgnoreAttribute>(method);
+                IgnoreAttribute attributeIgnore = AttributeParser.GetAttribute<IgnoreAttribute>(method);
                 if (attributeIgnore != null)
                 {
                     var methodResult = new MethodResult(method);
@@ -75,7 +74,7 @@ namespace PUnit.Framework
                     classResult.MethodResults.Add(methodResult);
                     continue;
                 }
-                NUnit.Framework.ExpectedExceptionAttribute attributeExpectedException = AttributeParser.GetAttribute<NUnit.Framework.ExpectedExceptionAttribute>(method);
+                ExpectedExceptionAttribute attributeExpectedException = AttributeParser.GetAttribute<ExpectedExceptionAttribute>(method);
                 if (attributeExpectedException != null && attributeExpectedException.ExpectedException != null)
                     classResult.MethodResults.Add(ExecuteMethodExpectedException(typeObject, method, attributeExpectedException.ExpectedException));
                 else

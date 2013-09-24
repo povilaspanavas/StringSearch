@@ -5,10 +5,10 @@ using System.Text;
 
 namespace PUnit.Framework.Tests.MockData
 {
-    [NUnit.Framework.TestFixture]
+    [TestFixture]
     public class ClassWithTestExpectingException
     {
-        [NUnit.Framework.Test, NUnit.Framework.ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestThrowsExpectedException()
         {
             throw new ArgumentOutOfRangeException("Out of bounds exception");
