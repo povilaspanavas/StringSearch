@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PUnit.Framework.Results;
 
 namespace PUnit.Framework.Engine.Output
 {

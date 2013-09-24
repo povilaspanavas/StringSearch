@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
-namespace PUnit.Framework
+namespace PUnit.Framework.Results
 {
     public class MethodResult
     {

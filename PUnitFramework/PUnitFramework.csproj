@@ -47,6 +47,7 @@
     <Compile Include="Engine\Output\ConsoleOutput.cs" />
     <Compile Include="Engine\Output\IOutpuData.cs" />
     <Compile Include="Engine\Output\NoOutput.cs" />
+    <Compile Include="Results\BasicResult.cs" />
     <Compile Include="Results\ClassResult.cs" />
     <Compile Include="Results\MethodResult.cs" />
     <Compile Include="Results\SuiteResult.cs" />
