@@ -19,12 +19,15 @@ namespace SearchStringApp
         /// It accepts these params
         /// --help - shows all the possible commands
         /// --default - automatically runs string search cases from the task pdf file
+        /// --test - automatically runs tests from TestFindString assembly
         /// no parameter - will ask for text and substring
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
         {
             Console.WriteLine("This is console application to demonstrate FindString class. For help use argument --help\n\n");
+            // You can't use swtich if string isn't a constant
+            // For simplicity I didn't create console command mechanism, which would allow remove these if else statements
             if (args.Contains("--help"))
                 PrintHelpCommand();
             else if (args.Contains("--default"))
@@ -68,7 +71,7 @@ namespace SearchStringApp
             Console.WriteLine("Possible commands:");
             Console.WriteLine("--helper        to show all the commands");
             Console.WriteLine("--default       to execute default use cases by using default data");
-            Console.WriteLine("--test          to run tests");
+            Console.WriteLine("--test          to run tests from TestFindString assembly");
         }
 
         private static void FindStringOutputResult(string text, string subtext)

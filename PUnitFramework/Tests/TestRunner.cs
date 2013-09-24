@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using PUnit.Framework.Tests.MockData;
+using PUnit.Framework.Results;
 
 namespace PUnit.Framework.Tests
 {

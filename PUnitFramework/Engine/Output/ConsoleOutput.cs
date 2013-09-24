@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PUnit.Framework.Results;
 
 namespace PUnit.Framework.Engine
 {
+    /// <summary>
+    /// Very simple console outputer. Doesn't include details about failing 
+    /// for simplicity of this task
+    /// </summary>
     public class ConsoleOutput : IOutputData
     {
         public void Write(SuiteResult testResults)
