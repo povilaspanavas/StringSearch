@@ -40,9 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnicodeSkipArray.cs" />
-    <Compile Include="FindString.cs" />
+    <Compile Include="Tests\TestFindString.cs" />
+    <Compile Include="Engine\UnicodeSkipArray.cs" />
+    <Compile Include="Engine\FindString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestFramework\PUnitFramework.csproj">
+      <Project>{B1356804-9DAC-4A26-B737-E7D6D3A836FA}</Project>
+      <Name>PUnitFramework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

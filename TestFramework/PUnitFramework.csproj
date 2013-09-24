@@ -57,12 +57,6 @@
     <Compile Include="Tests\TestAttributeParser.cs" />
     <Compile Include="Tests\TestRunner.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\StringSearch\StringSearch.csproj">
-      <Project>{A3491EE5-3C4E-45B3-B91C-3CEF370B5914}</Project>
-      <Name>StringSearch</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

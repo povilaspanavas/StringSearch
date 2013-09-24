@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchStringApp", "SearchSt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringSearch", "StringSearch\StringSearch.csproj", "{A3491EE5-3C4E-45B3-B91C-3CEF370B5914}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringSearch.Tests", "StringSearch.Tests\StringSearch.Tests.csproj", "{F9758904-FE70-4D7A-81D1-178A8CFBB321}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PUnitFramework", "TestFramework\PUnitFramework.csproj", "{B1356804-9DAC-4A26-B737-E7D6D3A836FA}"
 EndProject
 Global
@@ -39,16 +37,6 @@ Global
 		{A3491EE5-3C4E-45B3-B91C-3CEF370B5914}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A3491EE5-3C4E-45B3-B91C-3CEF370B5914}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A3491EE5-3C4E-45B3-B91C-3CEF370B5914}.Release|x86.ActiveCfg = Release|Any CPU
-		{F9758904-FE70-4D7A-81D1-178A8CFBB321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9758904-FE70-4D7A-81D1-178A8CFBB321}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9758904-FE70-4D7A-81D1-178A8CFBB321}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F9758904-FE70-4D7A-81D1-178A8CFBB321}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F9758904-FE70-4D7A-81D1-178A8CFBB321}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F9758904-FE70-4D7A-81D1-178A8CFBB321}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9758904-FE70-4D7A-81D1-178A8CFBB321}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9758904-FE70-4D7A-81D1-178A8CFBB321}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{F9758904-FE70-4D7A-81D1-178A8CFBB321}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{F9758904-FE70-4D7A-81D1-178A8CFBB321}.Release|x86.ActiveCfg = Release|Any CPU
 		{B1356804-9DAC-4A26-B737-E7D6D3A836FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B1356804-9DAC-4A26-B737-E7D6D3A836FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1356804-9DAC-4A26-B737-E7D6D3A836FA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
