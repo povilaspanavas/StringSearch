@@ -12,21 +12,45 @@ namespace PUnit.Framework
         public void Run(Assembly assembly)
         {
             var testTypes = ExtractTestTypes(assembly);
-            var testMethods = ExtractTestMethods(testTypes);
+            var testMethods = ExtractTestMethods(testTypes[0]);
+            var result = ExecuteTestFixture(testTypes[0]);
         }
 
-        public List<MethodInfo> ExtractTestMethods(List<Type> testTypes)
+        public string ExecuteTestFixture(Type type)
+        {
+            var testMethods = ExtractTestMethods(type);
+            if (testMethods.Count == 0)
+                return "0";
+            object typeObject = Activator.CreateInstance(type);
+            foreach (MethodInfo methodInfo in testMethods)
+            {
+                try
+                {
+                    methodInfo.Invoke(typeObject, null);    
+                }
+                catch (Exception ex)
+                {
+                    NUnit.Framework.ExpectedExceptionAttribute attribute = AttributeParser.GetAttribute<NUnit.Framework.ExpectedExceptionAttribute>(methodInfo);
+                    if (attribute.ExpectedException != null
+                        && attribute.ExpectedException.GetType() == ex.GetType())
+                        
+                        ex.ToString(); //OK
+                    else
+                        ex.ToString(); // bad
+                }
+            }
+            return "adf";
+        }
+
+        public List<MethodInfo> ExtractTestMethods(Type type)
         {
             var methodsToTest = new List<MethodInfo>();
-            foreach (Type type in testTypes)
+            MethodInfo[] methods = type.GetMethods();
+            foreach (MethodInfo methodInfo in methods)
             {
-                MethodInfo[] methods = type.GetMethods();
-                foreach (MethodInfo methodInfo in methods)
-                {
-                    NUnit.Framework.TestAttribute attribute =  AttributeParser.GetAttribute<NUnit.Framework.TestAttribute>(methodInfo);
-                    if (attribute != null)
-                        methodsToTest.Add(methodInfo);
-                }
+                NUnit.Framework.TestAttribute attribute =  AttributeParser.GetAttribute<NUnit.Framework.TestAttribute>(methodInfo);
+                if (attribute != null)
+                    methodsToTest.Add(methodInfo);
             }
             return methodsToTest;
         }
@@ -65,12 +89,17 @@ namespace PUnit.Framework
         public void TestMethodsExtraction()
         {
             var testRunner = new TestRunner();
-            var testTypes = new List<Type>();
-            testTypes.Add(typeof(TestFindString));
-            var result = testRunner.ExtractTestMethods(testTypes);
+            var result = testRunner.ExtractTestMethods(typeof(TestFindString));
             NUnit.Framework.Assert.AreEqual(17, result.Count);
             //NUnit.Framework.Assert.AreEqual(typeof(TestFindString).FullName, testTypes[0].FullName);
         }
 
+        [NUnit.Framework.Test]
+        public void TestExecuteTestFicture()
+        {
+            var testRunner = new TestRunner();
+            var ghmz = testRunner.ExecuteTestFixture(typeof(TestFindString));
+            //NUnit.Framework.Assert.AreEqual(typeof(TestFindString).FullName, testTypes[0].FullName);
+        }
     }
 }
