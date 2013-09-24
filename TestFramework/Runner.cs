@@ -9,8 +9,6 @@ namespace PUnit.Framework
 {
     public class Runner
     {
-       
-
         public SuiteResult Run(Assembly assembly)
         {
             var typesWithTests = AttributeParser.ExtractTestTypes<NUnit.Framework.TestFixtureAttribute>(assembly);
@@ -68,16 +66,14 @@ namespace PUnit.Framework
             object typeObject = Activator.CreateInstance(type);
             foreach (MethodInfo method in testMethods)
             {
-                 NUnit.Framework.IgnoreAttribute attributeIgnore = AttributeParser.GetAttribute<NUnit.Framework.IgnoreAttribute>(method);
-                 if (attributeIgnore != null)
-                     continue;
-                 NUnit.Framework.ExpectedExceptionAttribute attributeExpectedException = AttributeParser.GetAttribute<NUnit.Framework.ExpectedExceptionAttribute>(method);
-                 if (attributeExpectedException != null && attributeExpectedException.ExpectedException != null)
-                     classResult.MethodResults.Add(ExecuteMethodExpectedException(typeObject, method, attributeExpectedException.ExpectedException));
-                 else
-                     classResult.MethodResults.Add(ExecuteMethod(typeObject, method));
-    
-                 
+                NUnit.Framework.IgnoreAttribute attributeIgnore = AttributeParser.GetAttribute<NUnit.Framework.IgnoreAttribute>(method);
+                if (attributeIgnore != null)
+                    continue;
+                NUnit.Framework.ExpectedExceptionAttribute attributeExpectedException = AttributeParser.GetAttribute<NUnit.Framework.ExpectedExceptionAttribute>(method);
+                if (attributeExpectedException != null && attributeExpectedException.ExpectedException != null)
+                    classResult.MethodResults.Add(ExecuteMethodExpectedException(typeObject, method, attributeExpectedException.ExpectedException));
+                else
+                    classResult.MethodResults.Add(ExecuteMethod(typeObject, method));
             }
             return classResult;
         }
@@ -112,48 +108,13 @@ namespace PUnit.Framework
                     return methodResult;
                 else
                     methodResult.Success = false;
-                    methodResult.Exception = ex;
-                    methodResult.FailMessage = "Unexpected exception occured: " + ex.Message;
+                methodResult.Exception = ex;
+                methodResult.FailMessage = "Unexpected exception occured: " + ex.Message;
             }
             methodResult.Success = false;
             methodResult.FailMessage = "Expected exception didn't occur";
             return methodResult;
         }
-
-
     }
-    
-    /// <summary>
-    /// TODO use special classes only for this test
-    /// </summary>
-    [NUnit.Framework.TestFixture]
-    public class TestTestRunner
-    {
 
-        [NUnit.Framework.Test]
-        public void TestTypesExtraction()
-        {
-            var testRunner = new Runner();
-            var testTypes = AttributeParser.ExtractTestTypes<NUnit.Framework.TestFixtureAttribute>(typeof(TestFindString).Assembly);
-            NUnit.Framework.Assert.AreEqual(1, testTypes.Count);
-            NUnit.Framework.Assert.AreEqual(typeof(TestFindString).FullName, testTypes[0].FullName);
-        }
-
-        [NUnit.Framework.Test]
-        public void TestMethodsExtraction()
-        {
-            var testRunner = new Runner();
-            var result = AttributeParser.ExtractTestMethods<NUnit.Framework.TestAttribute>(typeof(TestFindString));
-            NUnit.Framework.Assert.AreEqual(17, result.Count);
-            //NUnit.Framework.Assert.AreEqual(typeof(TestFindString).FullName, testTypes[0].FullName);
-        }
-
-        [NUnit.Framework.Test]
-        public void TestExecuteTestFicture()
-        {
-            var testRunner = new Runner();
-            var ghmz = testRunner.ExecuteTestFixture(typeof(TestFindString));
-            //NUnit.Framework.Assert.AreEqual(typeof(TestFindString).FullName, testTypes[0].FullName);
-        }
-    }
 }
