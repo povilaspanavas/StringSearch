@@ -49,5 +49,31 @@ namespace PUnit.Framework
                 return null;
             return attributes[0] as T;
         }
+
+        public static List<MethodInfo> ExtractTestMethods<T>(Type type) where T : class
+        {
+            var methodsToTest = new List<MethodInfo>();
+            MethodInfo[] methods = type.GetMethods();
+            foreach (MethodInfo methodInfo in methods)
+            {
+                T attribute = AttributeParser.GetAttribute<T>(methodInfo);
+                if (attribute != null)
+                    methodsToTest.Add(methodInfo);
+            }
+            return methodsToTest;
+        }
+
+        public static List<Type> ExtractTestTypes<T>(Assembly assembly) where T : class
+        {
+            var testTypes = new List<Type>();
+            var types = assembly.GetExportedTypes();
+            foreach (Type type in types)
+            {
+                T attribute = AttributeParser.GetAttribute<T>(type);
+                if (attribute != null)
+                    testTypes.Add(type);
+            }
+            return testTypes;
+        }
     }
 }
