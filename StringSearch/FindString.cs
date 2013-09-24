@@ -11,7 +11,7 @@ namespace StringSearch
     /// 
     /// The licence allows to use this code in any way.
     /// 
-    /// By default is case-insensitive
+    /// By default it is case-insensitive
     /// 
     /// Also, it does work like string.IndexOf + 1
     /// </summary>
@@ -24,23 +24,13 @@ namespace StringSearch
         // Returned index when no match found
         public const int InvalidIndex = -1;
 
-        public FindString(string subtext)
+        public FindString()
         {
-            Initialize(subtext, true);
         }
 
-        public FindString(string subtext, bool ignoreCase)
+        public FindString(bool ignoreCase)
         {
-            Initialize(subtext, ignoreCase);
-        }
-
-        /// <summary>
-        /// Initializes this instance to search a new pattern.
-        /// </summary>
-        /// <param name="subtext">Pattern to search for</param>
-        public void Initialize(string subtext)
-        {
-            Initialize(subtext, true);
+            this._ignoreCase = ignoreCase;
         }
 
         /// <summary>
@@ -48,10 +38,9 @@ namespace StringSearch
         /// </summary>
         /// <param name="subtext">Pattern to search for</param>
         /// <param name="ignoreCase">If true, search is case-insensitive</param>
-        public void Initialize(string subtext, bool ignoreCase)
+        public void Initialize(string subtext)
         {
             _subtext = subtext;
-            _ignoreCase = ignoreCase;
 
             // Create multi-stage skip table
             _skipArray = new UnicodeSkipArray(_subtext.Length);
@@ -77,9 +66,9 @@ namespace StringSearch
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public int IndexOf(string text)
+        public int IndexOf(string text, string subtext)
         {
-            return IndexOf(text, 0);
+            return IndexOf(text, subtext, 0);
         }
 
         /// <summary>
@@ -89,8 +78,10 @@ namespace StringSearch
         /// <param name="text">Text to search</param>
         /// <param name="startIndex">Offset to begin search</param>
         /// <returns></returns>
-        public int IndexOf(string text, int startIndex)
+        public int IndexOf(string text, string subtext, int startIndex)
         {
+            Initialize(subtext);
+
             int i = startIndex;
 
             // Loop while there's still room for search term
@@ -127,16 +118,16 @@ namespace StringSearch
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public List<int> AllIndexesOf(string text)
+        public List<int> AllIndexesOf(string text, string subtext)
         {
             var indexesList = new List<int>();
-            var index = this.IndexOf(text);
+            var index = this.IndexOf(text, subtext);
             while (index != InvalidIndex)
             {
                 indexesList.Add(index);
                 if (index >= text.Length)
                     break;
-                index = this.IndexOf(text, index - 1 + _subtext.Length);
+                index = this.IndexOf(text, subtext, index - 1 + _subtext.Length);
             }
             return indexesList;
         }
