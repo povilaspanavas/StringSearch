@@ -11,7 +11,7 @@ namespace StringSearch
     /// 
     /// The licence allows to use this code in any way.
     /// </summary>
-    public class BoyerMoore
+    public class FindString
     {
         private string _pattern;
         private bool _ignoreCase;
@@ -20,12 +20,12 @@ namespace StringSearch
         // Returned index when no match found
         public const int InvalidIndex = -1;
 
-        public BoyerMoore(string pattern)
+        public FindString(string pattern)
         {
             Initialize(pattern, false);
         }
 
-        public BoyerMoore(string pattern, bool ignoreCase)
+        public FindString(string pattern, bool ignoreCase)
         {
             Initialize(pattern, ignoreCase);
         }
