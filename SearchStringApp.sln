@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringSearch", "StringSearc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringSearch.Tests", "StringSearch.Tests\StringSearch.Tests.csproj", "{F9758904-FE70-4D7A-81D1-178A8CFBB321}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFramework", "TestFramework\TestFramework.csproj", "{B1356804-9DAC-4A26-B737-E7D6D3A836FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PUnitFramework", "TestFramework\PUnitFramework.csproj", "{B1356804-9DAC-4A26-B737-E7D6D3A836FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
