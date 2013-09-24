@@ -9,11 +9,12 @@ namespace PUnit.Framework
 {
     public class TestRunner
     {
-        public void Run(Assembly assembly)
+        public List<ClassResult> Run(Assembly assembly)
         {
             var testTypes = ExtractTestTypes(assembly);
             var testMethods = ExtractTestMethods(testTypes[0]);
             var result = ExecuteTestFixture(testTypes[0]);
+            return null;
         }
 
         public string ExecuteTestFixture(Type type)
@@ -21,6 +22,8 @@ namespace PUnit.Framework
             var testMethods = ExtractTestMethods(type);
             if (testMethods.Count == 0)
                 return "0";
+
+            ClassResult classResult = new ClassResult(type);
             object typeObject = Activator.CreateInstance(type);
             foreach (MethodInfo method in testMethods)
             {
@@ -29,30 +32,35 @@ namespace PUnit.Framework
                      continue;
                  NUnit.Framework.ExpectedExceptionAttribute attributeExpectedException = AttributeParser.GetAttribute<NUnit.Framework.ExpectedExceptionAttribute>(method);
                  if (attributeExpectedException != null && attributeExpectedException.ExpectedException != null)
-                     ExecuteMethodExpectedException(typeObject, method, attributeExpectedException.ExpectedException);
+                     classResult.MethodResults.Add(ExecuteMethodExpectedException(typeObject, method, attributeExpectedException.ExpectedException));
                  else
-                     ExecuteMethod(typeObject, method);
+                     classResult.MethodResults.Add(ExecuteMethod(typeObject, method));
     
-               
+                 
             }
             return "adf";
         }
 
-        private bool ExecuteMethod(object classObject, MethodInfo method)
+        private MethodResult ExecuteMethod(object classObject, MethodInfo method)
         {
+            var methodResult = new MethodResult(method);
             try
             {
                 method.Invoke(classObject, null);
             }
             catch (Exception ex)
             {
-                return false;
+                // TODO remove code duplication
+                methodResult.Success = false;
+                methodResult.Exception = ex;
+                methodResult.FailMessage = "Unexpected exception occured: " + ex.Message;
             }
-            return true;
+            return methodResult;
         }
 
-        public bool ExecuteMethodExpectedException(object classObject, MethodInfo method, Type expectedException)
+        public MethodResult ExecuteMethodExpectedException(object classObject, MethodInfo method, Type expectedException)
         {
+            var methodResult = new MethodResult(method);
             try
             {
                 method.Invoke(classObject, null);
@@ -60,11 +68,15 @@ namespace PUnit.Framework
             catch (Exception ex)
             {
                 if (expectedException.GetType() == ex.GetType())
-                    return true;
+                    return methodResult;
                 else
-                    return false;
+                    methodResult.Success = false;
+                    methodResult.Exception = ex;
+                    methodResult.FailMessage = "Unexpected exception occured: " + ex.Message;
             }
-            return false;
+            methodResult.Success = false;
+            methodResult.FailMessage = "Expected exception didn't occur";
+            return methodResult;
         }
 
         public List<MethodInfo> ExtractTestMethods(Type type)

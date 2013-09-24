@@ -8,7 +8,25 @@ namespace PUnit.Framework
     public class ClassResult
     {
         private bool _success;
-        private List<MethodResult> _methodResults;
+        private string _name;
+        private List<MethodResult> _methodResults = new List<MethodResult>();
+
+        public ClassResult()
+        {
+
+        }
+
+        public ClassResult(Type type)
+            : this()
+        {
+            this._name = type.Name;
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
 
         public List<MethodResult> MethodResults
         {
