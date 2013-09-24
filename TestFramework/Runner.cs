@@ -33,7 +33,7 @@ namespace PUnit.Framework
                     else
                         classResult.SuccessCount++;
                 }
-                if (classResult.FailedCount > 0) // ignored cases isn't equal to failed ones
+                if (classResult.FailedCount == 0) // ignored cases isn't equal to failed ones
                     summary.SuccessfullTests.Add(classResult);
                 else
                     summary.FailedTests.Add(classResult);
