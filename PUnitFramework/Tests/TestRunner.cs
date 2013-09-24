@@ -12,8 +12,6 @@ namespace PUnit.Framework.Tests
     {
         private Runner runner = new Runner();
 
-       
-
         [Test]
         public void ExecuteTestFixture()
         {

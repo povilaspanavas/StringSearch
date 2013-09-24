@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using StringSearch;
 using PUnit.Framework;
 using PUnit.Framework.Engine;
+using StringSearch;
 using StringSearch.Tests;
 
 
 namespace SearchStringApp
 {
     /// <summary>
-    /// This console application is created  to demonstrate FindSearch
+    /// This console application is created to demonstrate FindSearch
     /// </summary>
     class Program
     {

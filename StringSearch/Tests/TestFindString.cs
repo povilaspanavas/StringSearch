@@ -101,7 +101,7 @@ namespace StringSearch.Tests
             new FindString().IndexOf(_text, "Tea", _text.Length);
         }
 
-        #region Test from the task's pdf file
+        #region Tests from the task's pdf file
         [Test]
         public void SearchForPolly()
         {
