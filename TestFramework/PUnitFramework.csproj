@@ -41,13 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes.cs" />
-    <Compile Include="ClassResult.cs" />
-    <Compile Include="MethodResult.cs" />
-    <Compile Include="TestRunner.cs" />
+    <Compile Include="Attributes\AttributeParser.cs" />
+    <Compile Include="Attributes\Attributes.cs" />
+    <Compile Include="Results\ClassResult.cs" />
+    <Compile Include="Results\MethodResult.cs" />
+    <Compile Include="Results\TestSuiteResult.cs" />
+    <Compile Include="Runner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\MockData\ClassNoTestFixture.cs" />
     <Compile Include="Tests\MockData\ClassOneTest.cs" />
+    <Compile Include="Tests\MockData\ClassWithTestThrowingException.cs" />
     <Compile Include="Tests\TestAttributeParser.cs" />
     <Compile Include="Tests\TestRunner.cs" />
   </ItemGroup>

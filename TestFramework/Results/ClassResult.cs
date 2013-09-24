@@ -7,7 +7,6 @@ namespace PUnit.Framework
 {
     public class ClassResult
     {
-        private bool _success;
         private string _name;
         private List<MethodResult> _methodResults = new List<MethodResult>();
 
@@ -34,11 +33,31 @@ namespace PUnit.Framework
             set { _methodResults = value; }
         }
 
-        public bool Success
+        int _failedCount = 0;
+        int _successCount = 0;
+        int _ignoredCount = 0;
+
+        public int FailedCount
         {
-            get { return _success; }
-            set { _success = value; }
+            get { return _failedCount; }
+            set { _failedCount = value; }
         }
 
+        public int SuccessCount
+        {
+            get { return _successCount; }
+            set { _successCount = value; }
+        }
+
+        public int IgnoredCount
+        {
+            get { return _ignoredCount; }
+            set { _ignoredCount = value; }
+        }
+
+        public bool Success
+        {
+            get { return _failedCount == 0; }
+        }
     }
 }

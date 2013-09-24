@@ -6,16 +6,6 @@ using System.Reflection;
 
 namespace PUnit.Framework
 {
-    [AttributeUsage(AttributeTargets.Class)]
-    public class TestFixtureAttribute : Attribute
-    {
-    }
-
-    [AttributeUsage(AttributeTargets.Method)]
-    public class TestAttribute : Attribute
-    {
-    }
-
     public class AttributeParser
     {
         public static T GetAttribute<T>(Type type) where T : class

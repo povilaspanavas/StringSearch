@@ -9,19 +9,41 @@ namespace PUnit.Framework
 {
     public class Runner
     {
-        public List<ClassResult> Run(Assembly assembly)
+       
+
+        public SuiteResult Run(Assembly assembly)
         {
-            var testTypes = AttributeParser.ExtractTestTypes<NUnit.Framework.TestFixtureAttribute>(assembly);
-            var result = ExecuteAllTestFixtures(testTypes);
-            result = ValidateResults(result);
+            var typesWithTests = AttributeParser.ExtractTestTypes<NUnit.Framework.TestFixtureAttribute>(assembly);
+            var testsByClassResults = ExecuteAllTestFixtures(typesWithTests);
+            var result = MakeSummary(testsByClassResults);
             return result;
-            //return null;
         }
 
-        private List<ClassResult> ValidateResults(List<ClassResult> classResultList)
+        public SuiteResult MakeSummary(List<ClassResult> classResultList)
         {
-            // TODO pabaigti
-            return classResultList;
+            var summary = new SuiteResult();
+            foreach (ClassResult classResult in classResultList)
+            {
+                if (classResult == null)
+                    continue;
+                foreach (MethodResult methodResult in classResult.MethodResults)
+                {
+                    if (methodResult.Ignored)
+                        classResult.IgnoredCount++;
+                    else if (methodResult.Success == false)
+                        classResult.FailedCount++;
+                    else
+                        classResult.SuccessCount++;
+                }
+                if (classResult.Success)
+                    summary.SuccessfullTests.Add(classResult);
+                else
+                    summary.FailedTests.Add(classResult);
+                summary.FailedCount += classResult.FailedCount;
+                summary.IgnoredCount += classResult.IgnoredCount;
+                summary.SuccessCount += classResult.SuccessCount;
+            }
+            return summary;
         }
 
         public List<ClassResult> ExecuteAllTestFixtures(List<Type> testTypes)

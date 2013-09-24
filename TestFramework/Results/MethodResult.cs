@@ -9,6 +9,7 @@ namespace PUnit.Framework
     public class MethodResult
     {
         private bool _success = true;
+        private bool _ignored = true;
         private Exception _exception;
         private string _failMessage;
         private string _name;
@@ -47,5 +48,10 @@ namespace PUnit.Framework
             set { _success = value; }
         }
 
+        public bool Ignored
+        {
+            get { return _ignored; }
+            set { _ignored = value; }
+        }
     }
 }
