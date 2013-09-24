@@ -4,6 +4,6 @@
 
 USAGE:
 1. Open solution file SearchStringApp.sln and build
-2. Run.bat for simple text search.
-3. RunDefaultSearchCases.bat to run all the searches from pdf file
-4. RunTests.bat to run all the tests concercing string search
+2. For simple text search: call SearchStringApp\bin\Release\SearchStringApp.exe
+3. To run all the searches from pdf file: call SearchStringApp\bin\Release\SearchStringApp.exe --default 
+4. To run all the tests concercing string search: call SearchStringApp\bin\Release\SearchStringApp.exe --test
