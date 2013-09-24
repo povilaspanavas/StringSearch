@@ -8,7 +8,7 @@
     <ProjectGuid>{F9DEFA17-9580-4B6C-875B-D46B9047D0D8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SearchStringApp</RootNamespace>
+    <RootNamespace>SearchString.App</RootNamespace>
     <AssemblyName>SearchStringApp</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
