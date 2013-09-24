@@ -26,10 +26,12 @@ namespace SearchStringApp
             Console.WriteLine("This is console application to demonstrate FindString class. For help use argument --help");
             if (args.Contains("--help"))
                 PrintHelpCommand();
-            if (args.Contains("--default"))
+            else if (args.Contains("--default"))
                 ExecuteDefaultCommand();
-            StartStringSearchComand();
-            //Console.ReadKey();
+            else
+                StartStringSearchComand();
+            Console.WriteLine("Press any key to close application");
+            Console.ReadKey();
 
         }
 
@@ -44,16 +46,28 @@ namespace SearchStringApp
             var subtext = Console.ReadLine();
 
             // Printing out the result
+            FindStringOutputResult(text, subtext);
+        }
+
+        private static void FindStringOutputResult(string text, string subtext)
+        {
             List<int> indexesList = new FindString().AllIndexesOf(text, subtext);
             if (indexesList.Count > 0)
-                Console.WriteLine(string.Join<int>(", ", indexesList)); 
+                Console.WriteLine(string.Join<int>(", ", indexesList));
             else
                 Console.WriteLine("No matches");
         }
 
         private static void ExecuteDefaultCommand()
         {
-            throw new NotImplementedException();
+            var text = "Polly put the kettle on, polly put the kettle on, polly put the kettle on we'll all have tea";
+            FindStringOutputResult(text, "Polly");
+            FindStringOutputResult(text, "polly");
+            FindStringOutputResult(text, "Ll");
+            FindStringOutputResult(text, "ll");
+            FindStringOutputResult(text, "X");
+            FindStringOutputResult(text, "Polx");
+            FindStringOutputResult(text, "teacups");
         }
 
         private static void PrintHelpCommand()
