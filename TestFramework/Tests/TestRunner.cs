@@ -11,6 +11,7 @@ namespace PUnit.Framework.Tests
     class TestRunner
     {
         private Runner runner = new Runner();
+
         [NUnit.Framework.Test]
         public void Run()
         {
@@ -58,6 +59,25 @@ namespace PUnit.Framework.Tests
             var classResult = classResults[0];
             NUnit.Framework.Assert.AreEqual(1, classResult.MethodResults.Count);
             NUnit.Framework.Assert.IsTrue(classResult.Success);
+        }
+
+        [NUnit.Framework.Test]
+        public void ExecuteTestFixtureWithIgnoredTest()
+        {
+            var classResult = runner.ExecuteTestFixture(typeof(ClassWithIgnoredTest));
+            List<ClassResult> results = new List<ClassResult>();
+            results.Add(classResult);
+            var suiteResult = runner.MakeSummary(results);
+            
+            NUnit.Framework.Assert.IsTrue(classResult.Success);
+            NUnit.Framework.Assert.AreEqual(typeof(ClassWithIgnoredTest).Name, classResult.Name);
+            NUnit.Framework.Assert.AreEqual(1, suiteResult.IgnoredCount);
+            NUnit.Framework.Assert.AreEqual(0, suiteResult.FailedCount);
+            NUnit.Framework.Assert.AreEqual(0, suiteResult.SuccessCount);
+
+            NUnit.Framework.Assert.AreEqual(1, suiteResult.SuccessfullTests.Count);
+            NUnit.Framework.Assert.AreEqual(1, suiteResult.SuccessfullTests[0].MethodResults.Count);
+            NUnit.Framework.Assert.IsTrue(suiteResult.SuccessfullTests[0].MethodResults[0].Ignored);
         }
     }
 }

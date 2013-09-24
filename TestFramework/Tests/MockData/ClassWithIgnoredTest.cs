@@ -6,12 +6,12 @@ using System.Text;
 namespace PUnit.Framework.Tests.MockData
 {
     [NUnit.Framework.TestFixture]
-    public class ClassWithTestThrowingException
+    public class ClassWithIgnoredTest
     {
-        [NUnit.Framework.Test]
-        public void TestThrowsException()
+        [NUnit.Framework.Test, NUnit.Framework.Ignore]
+        public void IgnoredTest()
         {
-            throw new Exception("I'm a failing test");
+
         }
     }
 }

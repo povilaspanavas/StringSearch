@@ -5,6 +5,7 @@ using System.Text;
 using StringSearch;
 using PUnit.Framework;
 using StringSearch.Tests;
+using PUnit.Framework.Tests.MockData;
 
 namespace SearchStringApp
 {
@@ -22,8 +23,8 @@ namespace SearchStringApp
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            SuiteResult result = new Runner().Run(typeof(TestFindString).Assembly);
-
+            //SuiteResult result = new Runner().Run(typeof(TestFindString).Assembly);
+            var result = new Runner().ExecuteTestFixture(typeof(ClassWithIgnoredTest));
             Console.WriteLine("This is console application to demonstrate FindString class. For help use argument --help");
             if (args.Contains("--help"))
                 PrintHelpCommand();
