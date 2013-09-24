@@ -22,24 +22,49 @@ namespace PUnit.Framework
             if (testMethods.Count == 0)
                 return "0";
             object typeObject = Activator.CreateInstance(type);
-            foreach (MethodInfo methodInfo in testMethods)
+            foreach (MethodInfo method in testMethods)
             {
-                try
-                {
-                    methodInfo.Invoke(typeObject, null);    
-                }
-                catch (Exception ex)
-                {
-                    NUnit.Framework.ExpectedExceptionAttribute attribute = AttributeParser.GetAttribute<NUnit.Framework.ExpectedExceptionAttribute>(methodInfo);
-                    if (attribute.ExpectedException != null
-                        && attribute.ExpectedException.GetType() == ex.GetType())
-                        
-                        ex.ToString(); //OK
-                    else
-                        ex.ToString(); // bad
-                }
+                 NUnit.Framework.IgnoreAttribute attributeIgnore = AttributeParser.GetAttribute<NUnit.Framework.IgnoreAttribute>(method);
+                 if (attributeIgnore != null)
+                     continue;
+                 NUnit.Framework.ExpectedExceptionAttribute attributeExpectedException = AttributeParser.GetAttribute<NUnit.Framework.ExpectedExceptionAttribute>(method);
+                 if (attributeExpectedException != null && attributeExpectedException.ExpectedException != null)
+                     ExecuteMethodExpectedException(typeObject, method, attributeExpectedException.ExpectedException);
+                 else
+                     ExecuteMethod(typeObject, method);
+    
+               
             }
             return "adf";
+        }
+
+        private bool ExecuteMethod(object classObject, MethodInfo method)
+        {
+            try
+            {
+                method.Invoke(classObject, null);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool ExecuteMethodExpectedException(object classObject, MethodInfo method, Type expectedException)
+        {
+            try
+            {
+                method.Invoke(classObject, null);
+            }
+            catch (Exception ex)
+            {
+                if (expectedException.GetType() == ex.GetType())
+                    return true;
+                else
+                    return false;
+            }
+            return false;
         }
 
         public List<MethodInfo> ExtractTestMethods(Type type)
