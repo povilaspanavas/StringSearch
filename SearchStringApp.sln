@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchStringApp", "SearchSt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringSearch", "StringSearch\StringSearch.csproj", "{A3491EE5-3C4E-45B3-B91C-3CEF370B5914}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PUnitFramework", "TestFramework\PUnitFramework.csproj", "{B1356804-9DAC-4A26-B737-E7D6D3A836FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PUnitFramework", "PUnitFramework\PUnitFramework.csproj", "{B1356804-9DAC-4A26-B737-E7D6D3A836FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
