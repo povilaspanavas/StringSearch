@@ -8,6 +8,10 @@ namespace PUnit.Framework
     public class ClassResult
     {
         private string _name;
+        int _failedCount = 0;
+        int _successCount = 0;
+        int _ignoredCount = 0;
+
         private List<MethodResult> _methodResults = new List<MethodResult>();
 
         public ClassResult()
@@ -32,10 +36,6 @@ namespace PUnit.Framework
             get { return _methodResults; }
             set { _methodResults = value; }
         }
-
-        int _failedCount = 0;
-        int _successCount = 0;
-        int _ignoredCount = 0;
 
         public int FailedCount
         {
