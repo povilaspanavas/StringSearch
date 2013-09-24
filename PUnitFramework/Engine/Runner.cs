@@ -3,16 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
+using PUnit.Framework.Engine;
+using PUnit.Framework.Engine.Output;
 
 namespace PUnit.Framework
 {
     public class Runner
     {
+        private IOutputData _outputData = null;
+
+        public Runner(IOutputData outputData)
+        {
+            this._outputData = outputData;
+        }
+
+        public Runner()
+        {
+            _outputData = new NoOutput();
+        }
+
         public SuiteResult Run(Assembly assembly)
         {
             var typesWithTests = AttributeParser.ExtractTestTypes<TestFixtureAttribute>(assembly);
             var testsByClassResults = ExecuteAllTestFixtures(typesWithTests);
             var result = MakeSummary(testsByClassResults);
+            _outputData.Write(result);
             return result;
         }
 

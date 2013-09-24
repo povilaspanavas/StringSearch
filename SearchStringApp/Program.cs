@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using StringSearch;
 using PUnit.Framework;
+using PUnit.Framework.Engine;
 using StringSearch.Tests;
-using PUnit.Framework.Tests.MockData;
+
 
 namespace SearchStringApp
 {
@@ -23,17 +24,17 @@ namespace SearchStringApp
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            //SuiteResult result = new Runner().Run(typeof(TestFindString).Assembly);
-            var result = new Runner().ExecuteTestFixture(typeof(ClassWithIgnoredTest));
             Console.WriteLine("This is console application to demonstrate FindString class. For help use argument --help");
             if (args.Contains("--help"))
                 PrintHelpCommand();
             else if (args.Contains("--default"))
                 ExecuteDefaultCommand();
+            else if (args.Contains("--test"))
+                new Runner(new ConsoleOutput()).Run(typeof(TestFindString).Assembly);
             else
                 StartStringSearchComand();
-            Console.WriteLine("Press any key to close application");
-            Console.ReadKey();
+            //Console.WriteLine("Press any key to close application");
+            //Console.ReadKey();
         }
 
         private static void StartStringSearchComand()
