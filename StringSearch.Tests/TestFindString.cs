@@ -25,6 +25,20 @@ namespace StringSearch.Tests
         }
 
         [Test]
+        public void SearchForPollyCaseSensitive()
+        {
+            var indexesList = new FindString(false).AllIndexesOf(text, "Polly");
+            Assert.AreEqual(1, indexesList.Count);
+            Assert.AreEqual(1, indexesList[0]);
+        }
+
+        [Test]
+        public void SearchForTeaCaseSensitive()
+        {
+            Assert.AreEqual(FindString.InvalidIndex, new FindString(false).IndexOf(text, "Tea"));
+        }
+
+        [Test]
         public void SearchForPolly()
         {
             var indexesList = new FindString().AllIndexesOf(text, "Polly");
