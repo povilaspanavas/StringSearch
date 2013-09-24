@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Attributes\AttributeParser.cs" />
     <Compile Include="Attributes\Attributes.cs" />
+    <Compile Include="Engine\Assert.cs" />
+    <Compile Include="Engine\AssertException.cs" />
     <Compile Include="Results\ClassResult.cs" />
     <Compile Include="Results\MethodResult.cs" />
     <Compile Include="Results\SuiteResult.cs" />
