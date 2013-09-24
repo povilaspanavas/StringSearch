@@ -39,6 +39,44 @@ namespace StringSearch.Tests
         }
 
         [Test]
+        public void SearchingForEmptySubtext()
+        {
+            Assert.AreEqual(0, new FindString().IndexOf(text, string.Empty));
+        }
+
+        [Test]
+        public void SearchingWithingEmptyText()
+        {
+            Assert.AreEqual(FindString.InvalidIndex, new FindString().IndexOf(string.Empty, "sometext"));
+        }
+
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void SearchingForNullSubtext()
+        {
+            new FindString().IndexOf(text, null);
+        }
+
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void SearchingWithinNullText()
+        {
+            new FindString().IndexOf(null, text);
+        }
+
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void SearchingForBothNullParams()
+        {
+            new FindString().IndexOf(null, null);
+        }
+
+        [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void SearchingFromOutOfRangeIndex()
+        {
+            new FindString().IndexOf(text, "Tea", text.Length);
+
+        }
+
+        #region Test from the task's pdf file
+        [Test]
         public void SearchForPolly()
         {
             var indexesList = new FindString().AllIndexesOf(text, "Polly");
@@ -99,5 +137,6 @@ namespace StringSearch.Tests
         {
             Assert.AreEqual(FindString.InvalidIndex, new FindString().IndexOf(text, "teacups"));
         }
+        #endregion
     }
 }

@@ -17,7 +17,6 @@ namespace StringSearch
     /// </summary>
     public class FindString
     {
-        private string _subtext;
         private bool _ignoreCase = true;
         private UnicodeSkipArray _skipArray;
 
@@ -40,23 +39,22 @@ namespace StringSearch
         /// <param name="ignoreCase">If true, search is case-insensitive</param>
         public void Initialize(string subtext)
         {
-            _subtext = subtext;
 
             // Create multi-stage skip table
-            _skipArray = new UnicodeSkipArray(_subtext.Length);
+            _skipArray = new UnicodeSkipArray(subtext.Length);
             // Initialize skip table for this pattern
             if (_ignoreCase)
             {
-                for (int i = 0; i < _subtext.Length - 1; i++)
+                for (int i = 0; i < subtext.Length - 1; i++)
                 {
-                    _skipArray[Char.ToLower(_subtext[i])] = (byte)(_subtext.Length - i - 1);
-                    _skipArray[Char.ToUpper(_subtext[i])] = (byte)(_subtext.Length - i - 1);
+                    _skipArray[Char.ToLower(subtext[i])] = (byte)(subtext.Length - i - 1);
+                    _skipArray[Char.ToUpper(subtext[i])] = (byte)(subtext.Length - i - 1);
                 }
             }
             else
             {
-                for (int i = 0; i < _subtext.Length - 1; i++)
-                    _skipArray[_subtext[i]] = (byte)(_subtext.Length - i - 1);
+                for (int i = 0; i < subtext.Length - 1; i++)
+                    _skipArray[subtext[i]] = (byte)(subtext.Length - i - 1);
             }
         }
 
@@ -74,29 +72,41 @@ namespace StringSearch
         /// <summary>
         /// Searches for the current pattern within the given text
         /// starting at the specified index.
+        /// 
+        /// Returns zero if empty subtext provided
         /// </summary>
         /// <param name="text">Text to search</param>
         /// <param name="startIndex">Offset to begin search</param>
         /// <returns></returns>
         public int IndexOf(string text, string subtext, int startIndex)
         {
+            if (text == null || subtext == null)
+                throw new ArgumentNullException("Both text and subtext must be not null");
+            if (string.Empty.Equals(subtext)) // standard string.IndexOf behaviour
+                return 0;
+            if (string.Empty.Equals(text)) // standard string.IndexOf behaviour
+                return InvalidIndex;
+            if (startIndex >= text.Length)
+                throw new ArgumentOutOfRangeException("Start index must be within text");
+            
+
             Initialize(subtext);
 
             int i = startIndex;
 
             // Loop while there's still room for search term
-            while (i <= (text.Length - _subtext.Length))
+            while (i <= (text.Length - subtext.Length))
             {
                 // Look if we have a match at this position
-                int j = _subtext.Length - 1;
+                int j = subtext.Length - 1;
                 if (_ignoreCase)
                 {
-                    while (j >= 0 && Char.ToUpper(_subtext[j]) == Char.ToUpper(text[i + j]))
+                    while (j >= 0 && Char.ToUpper(subtext[j]) == Char.ToUpper(text[i + j]))
                         j--;
                 }
                 else
                 {
-                    while (j >= 0 && _subtext[j] == text[i + j])
+                    while (j >= 0 && subtext[j] == text[i + j])
                         j--;
                 }
 
@@ -107,7 +117,7 @@ namespace StringSearch
                 }
 
                 // Advance to next comparision
-                i += Math.Max(_skipArray[text[i + j]] - _subtext.Length + 1 + j, 1);
+                i += Math.Max(_skipArray[text[i + j]] - subtext.Length + 1 + j, 1);
             }
             // No match found
             return InvalidIndex;
@@ -127,7 +137,7 @@ namespace StringSearch
                 indexesList.Add(index);
                 if (index >= text.Length)
                     break;
-                index = this.IndexOf(text, subtext, index - 1 + _subtext.Length);
+                index = this.IndexOf(text, subtext, index - 1 + subtext.Length);
             }
             return indexesList;
         }

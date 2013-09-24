@@ -13,6 +13,8 @@ namespace SearchStringApp
         {
         
             string text = "Polly put the kettle on, polly put the kettle on, polly put the kettle on we'll all have tea";
+            var a = string.Empty;
+            var x = a.IndexOf("ff");
             var indexesList = new FindString(false).AllIndexesOf(text, "Polly");
             indexesList.ToString();
         }
