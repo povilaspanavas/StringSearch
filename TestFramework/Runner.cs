@@ -110,12 +110,16 @@ namespace PUnit.Framework
             }
             catch (Exception ex)
             {
-                if (expectedException.GetType() == ex.GetType())
+                if (expectedException == ex.GetType()
+                    || (ex.InnerException != null && expectedException == ex.InnerException.GetType()))
                     return methodResult;
                 else
+                {
                     methodResult.Success = false;
-                methodResult.Exception = ex;
-                methodResult.FailMessage = "Unexpected exception occured: " + ex.Message;
+                    methodResult.Exception = ex;
+                    methodResult.FailMessage = "Unexpected exception occured: " + ex.Message;
+                    return methodResult;
+                }
             }
             methodResult.Success = false;
             methodResult.FailMessage = "Expected exception didn't occur";

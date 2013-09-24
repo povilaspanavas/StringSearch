@@ -9,7 +9,7 @@ namespace PUnit.Framework
     public class MethodResult
     {
         private bool _success = true;
-        private bool _ignored = true;
+        private bool _ignored = false;
         private Exception _exception;
         private string _failMessage;
         private string _name;
