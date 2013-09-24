@@ -30,10 +30,25 @@ namespace StringSearch.Tests
             Assert.AreEqual(count, new FindString().AllIndexesOf(text, "we'll").Count); 
         }
 
+
         [Test]
         public void MatchesTheLastString()
         {
             Assert.AreEqual(90, new FindString().IndexOf(_text, "tea"));
+        }
+
+        [Test]
+        public void MatchesTheLastSimbol()
+        {
+            string text = "qwertyipopuopuipouioweuroia";
+            Assert.AreEqual(text.Length, new FindString().IndexOf(text, "a"));
+        }
+
+        [Test]
+        public void MatchesTheFirstSimbol()
+        {
+            string text = "aqwertyipopuopuipouioweuroi";
+            Assert.AreEqual(1, new FindString().IndexOf(text, "a"));
         }
 
         [Test]
