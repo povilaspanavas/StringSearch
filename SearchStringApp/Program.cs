@@ -68,6 +68,7 @@ namespace SearchStringApp
             Console.WriteLine("Possible commands:");
             Console.WriteLine("--helper        to show all the commands");
             Console.WriteLine("--default       to execute default use cases by using default data");
+            Console.WriteLine("--test          to run tests");
         }
 
         private static void FindStringOutputResult(string text, string subtext)
