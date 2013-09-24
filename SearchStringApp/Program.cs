@@ -24,13 +24,12 @@ namespace SearchStringApp
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Console.WriteLine("This is console application to demonstrate FindString class. For help use argument --help");
+            Console.WriteLine("This is console application to demonstrate FindString class. For help use argument --help\n\n");
             if (args.Contains("--help"))
                 PrintHelpCommand();
             else if (args.Contains("--default"))
                 ExecuteDefaultCommand();
             else if (args.Contains("--test"))
-                // new Runner(new ConsoleOutput()).Run(typeof(ConsoleOutput).Assembly);
                 new Runner(new ConsoleOutput()).Run(typeof(TestFindString).Assembly);
             else
                 StartStringSearchComand();

@@ -1,0 +1,1 @@
+call SearchStringApp\bin\Release\SearchStringApp.exe --test
