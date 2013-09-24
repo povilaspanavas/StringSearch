@@ -8,12 +8,9 @@ namespace SearchStringApp
 {
     /// <summary>
     /// This console application is created  to demonstrate FindSearch
-    /// 
-    /// 
     /// </summary>
     class Program
     {
-
         /// <summary>
         /// It accepts these params
         /// --help - shows all the possible commands
@@ -32,7 +29,6 @@ namespace SearchStringApp
                 StartStringSearchComand();
             Console.WriteLine("Press any key to close application");
             Console.ReadKey();
-
         }
 
         private static void StartStringSearchComand()
@@ -47,15 +43,6 @@ namespace SearchStringApp
 
             // Printing out the result
             FindStringOutputResult(text, subtext);
-        }
-
-        private static void FindStringOutputResult(string text, string subtext)
-        {
-            List<int> indexesList = new FindString().AllIndexesOf(text, subtext);
-            if (indexesList.Count > 0)
-                Console.WriteLine(string.Join<int>(", ", indexesList));
-            else
-                Console.WriteLine("No matches");
         }
 
         private static void ExecuteDefaultCommand()
@@ -75,6 +62,15 @@ namespace SearchStringApp
             Console.WriteLine("Possible commands:");
             Console.WriteLine("--helper        to show all the commands");
             Console.WriteLine("--default       to execute default use cases by using default data");
+        }
+
+        private static void FindStringOutputResult(string text, string subtext)
+        {
+            List<int> indexesList = new FindString().AllIndexesOf(text, subtext);
+            if (indexesList.Count > 0)
+                Console.WriteLine(string.Join<int>(", ", indexesList));
+            else
+                Console.WriteLine("No matches");
         }
     }
 }
