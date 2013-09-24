@@ -30,11 +30,12 @@ namespace SearchStringApp
             else if (args.Contains("--default"))
                 ExecuteDefaultCommand();
             else if (args.Contains("--test"))
+                // new Runner(new ConsoleOutput()).Run(typeof(ConsoleOutput).Assembly);
                 new Runner(new ConsoleOutput()).Run(typeof(TestFindString).Assembly);
             else
                 StartStringSearchComand();
-            //Console.WriteLine("Press any key to close application");
-            //Console.ReadKey();
+            Console.WriteLine("\nPress any key to close application");
+            Console.ReadKey();
         }
 
         private static void StartStringSearchComand()
