@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using StringSearch;
+using PUnit.Framework;
+using StringSearch.Tests;
 
 namespace SearchStringApp
 {
@@ -20,6 +22,8 @@ namespace SearchStringApp
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            SuiteResult result = new Runner().Run(typeof(TestFindString).Assembly);
+
             Console.WriteLine("This is console application to demonstrate FindString class. For help use argument --help");
             if (args.Contains("--help"))
                 PrintHelpCommand();

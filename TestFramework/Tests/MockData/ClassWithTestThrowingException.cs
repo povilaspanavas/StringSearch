@@ -8,7 +8,7 @@ namespace PUnit.Framework.Tests.MockData
     [NUnit.Framework.TestFixture]
     class ClassWithTestThrowingException
     {
-        [Test]
+        [NUnit.Framework.Test]
         public void TestThrowsException()
         {
             throw new Exception("I'm a failing test");

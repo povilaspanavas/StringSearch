@@ -46,5 +46,18 @@ namespace PUnit.Framework.Tests
             var classResult = classResults[0];
             NUnit.Framework.Assert.AreEqual(17, classResult.MethodResults.Count);
         }
+
+        [NUnit.Framework.Test]
+        public void ExecuteTestWithExpectedException()
+        {
+            List<Type> types = new List<Type>();
+            types.Add(typeof(ClassWithTestExpectingException));
+            var classResults = runner.ExecuteAllTestFixtures(types);
+            NUnit.Framework.Assert.AreEqual(1, classResults.Count);
+            
+            var classResult = classResults[0];
+            NUnit.Framework.Assert.AreEqual(1, classResult.MethodResults.Count);
+            NUnit.Framework.Assert.IsTrue(classResult.Success);
+        }
     }
 }

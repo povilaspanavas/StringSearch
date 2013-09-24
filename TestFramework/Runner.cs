@@ -33,7 +33,7 @@ namespace PUnit.Framework
                     else
                         classResult.SuccessCount++;
                 }
-                if (classResult.Success)
+                if (classResult.FailedCount > 0) // ignored cases isn't equal to failed ones
                     summary.SuccessfullTests.Add(classResult);
                 else
                     summary.FailedTests.Add(classResult);
@@ -68,7 +68,13 @@ namespace PUnit.Framework
             {
                 NUnit.Framework.IgnoreAttribute attributeIgnore = AttributeParser.GetAttribute<NUnit.Framework.IgnoreAttribute>(method);
                 if (attributeIgnore != null)
+                {
+                    var methodResult = new MethodResult(method);
+                    methodResult.Ignored = true;
+                    methodResult.Success = false;
+                    classResult.MethodResults.Add(methodResult);
                     continue;
+                }
                 NUnit.Framework.ExpectedExceptionAttribute attributeExpectedException = AttributeParser.GetAttribute<NUnit.Framework.ExpectedExceptionAttribute>(method);
                 if (attributeExpectedException != null && attributeExpectedException.ExpectedException != null)
                     classResult.MethodResults.Add(ExecuteMethodExpectedException(typeObject, method, attributeExpectedException.ExpectedException));

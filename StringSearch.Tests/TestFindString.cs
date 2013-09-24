@@ -71,9 +71,7 @@ namespace StringSearch.Tests
         [Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void SearchingFromOutOfRangeIndex()
         {
-            throw new Exception();
             new FindString().IndexOf(text, "Tea", text.Length);
-
         }
 
         #region Test from the task's pdf file

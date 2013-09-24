@@ -47,9 +47,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StringSearch.Tests\StringSearch.Tests.csproj">
+      <Project>{F9758904-FE70-4D7A-81D1-178A8CFBB321}</Project>
+      <Name>StringSearch.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StringSearch\StringSearch.csproj">
       <Project>{A3491EE5-3C4E-45B3-B91C-3CEF370B5914}</Project>
       <Name>StringSearch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestFramework\PUnitFramework.csproj">
+      <Project>{B1356804-9DAC-4A26-B737-E7D6D3A836FA}</Project>
+      <Name>PUnitFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

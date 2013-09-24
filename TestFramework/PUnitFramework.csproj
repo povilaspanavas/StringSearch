@@ -45,11 +45,12 @@
     <Compile Include="Attributes\Attributes.cs" />
     <Compile Include="Results\ClassResult.cs" />
     <Compile Include="Results\MethodResult.cs" />
-    <Compile Include="Results\TestSuiteResult.cs" />
+    <Compile Include="Results\SuiteResult.cs" />
     <Compile Include="Runner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\MockData\ClassNoTestFixture.cs" />
     <Compile Include="Tests\MockData\ClassOneTest.cs" />
+    <Compile Include="Tests\MockData\ClassWithTestExpectingException.cs" />
     <Compile Include="Tests\MockData\ClassWithTestThrowingException.cs" />
     <Compile Include="Tests\TestAttributeParser.cs" />
     <Compile Include="Tests\TestRunner.cs" />

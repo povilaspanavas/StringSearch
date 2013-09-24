@@ -53,5 +53,10 @@ namespace PUnit.Framework
             get { return _ignored; }
             set { _ignored = value; }
         }
+
+        public override string ToString()
+        {
+            return string.Format("[Success {0}] [Name {1}] [Fail message {2}]", Success, Name, FailMessage);
+        }
     }
 }
